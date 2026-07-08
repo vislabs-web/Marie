@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marie's Art Portfolio </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@800&family=Kalam:wght@700&display=swap');
+
+        :root {
+            --bg-about: #60a5fa; 
+            --bg-art: #f87171;   
+            
+            --nav-blue: #38bdf8;
+            --nav-green: #4ade80;
+            --accent-yellow: #fde047;
+            --border-thick: 4px solid #000;
+            --brutal-shadow: 8px 8px 0px #000;
+            --brutal-shadow-hover: 4px 4px 0px #000;
+            --brutal-shadow-sm: 4px 4px 0px #000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-about); 
+            transition: background-color 0.5s ease;
+            color: #000;
+            font-family: 'Space Grotesk', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body.art-mode {
+            background-color: var(--bg-art);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ==============================
+           NAVIGATION & HEADER
+           ============================== */
+        .desktop-nav {
+            background-color: #fff; 
+            border: var(--border-thick);
+            border-radius: 50px;
+            box-shadow: var(--brutal-shadow);
+            display: flex;
+            gap: 10px;
+            padding: 10px 30px;
+            margin-bottom: 3rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .desktop-nav a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .desktop-nav a:hover, .desktop-nav a.active-link {
+            background-color: var(--accent-yellow);
+            border: 2px solid #000;
+        }
+
+        .mobile-header {
+            display: none; 
+            background-color: #fff;
+            border: var(--border-thick);
+            border-radius: 50px;
+            box-shadow: var(--brutal-shadow-sm);
+            padding: 10px 40px;
+            font-size: 2rem;
+            font-family: 'Syne', sans-serif;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        /* ==============================
+           SECTION 1: ABOUT ME
+           ============================== */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            max-width: 1000px;
+            width: 100%;
+            padding: 3rem;
+            background-color: #fff;
+            border: var(--border-thick);
+            box-shadow: var(--brutal-shadow);
+            border-radius: 20px;
+            animation: fadeIn 0.4s ease-out;
+            margin-bottom: 3rem;
+        }
+
+        .artist-photo {
+            width: 350px;
+            height: 350px;
+            background-color: #e5e7eb;
+            border: var(--border-thick);
+            box-shadow: var(--brutal-shadow);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            transform: rotate(-1deg);
+        }
+
+        .artist-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .artist-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .title-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .block {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            line-height: 1;
+            text-transform: uppercase;
+            border: var(--border-thick);
+            box-shadow: var(--brutal-shadow-sm);
+            padding: 10px 25px;
+            display: inline-block;
+        }
+
+        .block-1 {
+            background-color: var(--accent-yellow);
+            transform: rotate(-3deg);
+        }
+
+        .block-2 {
+            background-color: var(--nav-green);
+            transform: rotate(2deg);
+            margin-left: 40px;
+        }
+
+        .bio-box {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.5;
+            background-color: #fff;
+            padding: 20px;
+            border: var(--border-thick);
+            box-shadow: var(--brutal-shadow-sm);
+            transform: rotate(-1deg);
+            margin-top: 10px;
+            max-width: 450px;
+        }
+
+        /* ==============================
+           SECTION 2: ART GALLERY
+           ============================== */
+        .gallery-section {
+            width: 100%;
+            max-width: 1200px; 
+            background-color: #fff;
+            border: var(--border-thick);
+            box-shadow: var(--brutal-shadow);
+            border-radius: 20px;
+            padding: 3rem;
+            animation: fadeIn 0.4s ease-out;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .brutal-title {
+            background-color: var(--accent-yellow);
+            border: var(--border-thick);
+            box-shadow: var(--brutal-shadow);
+            padding: 1rem 2.5rem;
+            display: inline-block;
+            transform: rotate(-3deg); 
+            margin-bottom: 15px;
+        }
+
+        .brutal-title h2 {
+            font-family: 'Syne', sans-serif; 
+            font-size: 3rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .gallery-header .signature {
+            display: block;
+            font-family: 'Kalam', cursive; 
+            font-size: 2.2rem;
+            font-weight: 700;
+            transform: rotate(2deg);
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .art-card {
+            background-color: var(--accent-yellow); 
+            border: var(--border-thick);
+            border-radius: 30px;
+            min-height: 500px; 
+            box-shadow: var(--brutal-shadow-sm);
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .art-card:hover {
+            transform: translate(6px, 6px);
+            box-shadow: none;
+        }
+
+        .art-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+
+        .gallery-footer {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 1.5rem;
+            background-color: var(--accent-yellow);
+            border: 2px solid #000;
+            border-radius: 15px;
+            box-shadow: var(--brutal-shadow-sm);
+        }
+
+        /* ==============================
+           CREDIT BOX
+           ============================== */
+        .credit-box {
+            margin-top: auto; /* Forces it to the absolute bottom of the page */
+            background-color: #000;
+            color: #fff;
+            padding: 8px 16px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 4px 4px 0px var(--accent-yellow);
+            z-index: 10;
+        }
+
+        /* ==============================
+           MOBILE POP-UP NAV
+           ============================== */
+        .mobile-fab-container {
+            display: none; 
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .fab-toggle {
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            border: var(--border-thick);
+            border-bottom: none;
+            border-right: none;
+            border-radius: 100% 0 0 0;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 15px;
+            padding-left: 15px;
+        }
+
+        .fab-toggle::before {
+            content: '+';
+            font-size: 2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-fab-container.active .fab-toggle::before {
+            transform: rotate(45deg);
+        }
+
+        .fab-menu {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .fab-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border: 3px solid #000;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .mobile-fab-container.active .fab-btn:nth-child(1) { transform: translate(0px, -110px); opacity: 1; }
+        .mobile-fab-container.active .fab-btn:nth-child(2) { transform: translate(-75px, -75px); opacity: 1; }
+        .mobile-fab-container.active .fab-btn:nth-child(3) { transform: translate(-110px, 0px); opacity: 1; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==============================
+           RESPONSIVE DESIGN 
+           ============================== */
+        @media (max-width: 1024px) {
+            body { padding: 1.5rem; justify-content: flex-start; }
+            .desktop-nav { display: none; }
+            .mobile-header { display: inline-block; }
+            
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 2.5rem;
+                padding: 3rem 1.5rem;
+            }
+            .artist-photo { width: 100%; max-width: 400px; height: 400px; }
+            
+            .artist-info { align-items: center; }
+            .title-blocks { align-items: center; }
+            .block { font-size: 3rem; }
+            .block-2 { margin-left: 0; transform: rotate(1deg); }
+
+            .mobile-fab-container { display: block; }
+
+            .gallery-section {
+                padding: 2rem 1.5rem;
+            }
+            .brutal-title h2 { font-size: 2rem; }
+            .brutal-title { padding: 1rem 1.5rem; }
+            
+            .art-grid { grid-template-columns: 1fr; }
+            .art-card { min-height: 400px; }
+
+            .credit-box {
+                margin-bottom: 100px; /* Keeps your credit safely above the pop-up menu button */
+            }
+        }
+        @media (max-width: 480px) {
+            .block { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="desktop-nav">
+        <a class="nav-link active-link" data-target="about-section">About me</a>
+        <a class="nav-link" data-target="art-section">Art</a>
+        <a href="https://instagram.com/yourlinkhere" target="_blank">Insta</a>
+    </nav>
+
+    <div class="mobile-header">
+        Artist
+    </div>
+
+    <main id="about-section" class="hero-section">
+        <div class="artist-photo">
+            <img src="artist-pic.jpg" alt="Marie Artist Photo">
+        </div>
+        
+        <div class="artist-info">
+            <div class="title-blocks">
+                <span class="block block-1">MARIE</span>
+                <span class="block block-2">ARTIST</span>
+            </div>
+            <p class="bio-box">21 years old artist | looking for artists to share the joy of non AI artists</p>
+        </div>
+    </main>
+
+    <section id="art-section" class="gallery-section hidden">
+        <div class="gallery-header">
+            <div class="brutal-title">
+                <h2>Welcome to Art Gallery</h2>
+            </div>
+            <span class="signature">- MARIE</span>
+        </div>
+
+        <div class="art-grid">
+            <div class="art-card">
+                <img src="genshin-1.jpg" alt="Genshin Artwork 1">
+            </div>
+            <div class="art-card">
+                <img src="genshin-2.jpg" alt="Genshin Artwork 2">
+            </div>
+            <div class="art-card">
+                <img src="genshin-3.jpg" alt="Genshin Artwork 3">
+            </div>
+            <div class="art-card">
+                <img src="genshin-4.jpg" alt="Genshin Artwork 4">
+            </div>
+            <div class="art-card">
+                <img src="genshin-5.jpg" alt="Genshin Artwork 5">
+            </div>
+            <div class="art-card">
+                <img src="flower.jpg" alt="Flower Artwork">
+            </div>
+            <div class="art-card">
+                <img src="person.jpg" alt="Person Portrait Artwork">
+            </div>
+        </div>
+
+        <div class="gallery-footer">
+            <p>Thank you for ur all support and Let's make this world non AI art Coz human have more beautiful art then AI</p>
+        </div>
+    </section>
+
+    <div class="credit-box">
+        website design by vir cookie
+    </div>
+
+    <div class="mobile-fab-container" id="fab-container">
+        <div class="fab-menu">
+            <a href="https://instagram.com/yourlinkhere" target="_blank" class="fab-btn">Insta</a>
+            <a class="fab-btn nav-link" data-target="art-section">Art</a>
+            <a class="fab-btn nav-link" data-target="about-section">Me</a>
+        </div>
+        <button class="fab-toggle" id="fab-toggle" aria-label="Toggle Menu"></button>
+    </div>
+
+    <script>
+        const fabToggle = document.getElementById('fab-toggle');
+        const fabContainer = document.getElementById('fab-container');
+
+        fabToggle.addEventListener('click', () => {
+            fabContainer.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('main, section');
+        const body = document.body;
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('data-target');
+                
+                sections.forEach(sec => {
+                    if (sec.id === 'about-section' || sec.id === 'art-section') {
+                        sec.classList.add('hidden');
+                    }
+                });
+
+                document.querySelectorAll('.desktop-nav .nav-link').forEach(nav => {
+                    nav.classList.remove('active-link');
+                });
+
+                document.getElementById(targetId).classList.remove('hidden');
+
+                if(link.parentElement.classList.contains('desktop-nav')) {
+                    link.classList.add('active-link');
+                }
+
+                if(link.classList.contains('fab-btn')) {
+                    fabContainer.classList.remove('active');
+                }
+
+                if (targetId === 'art-section') {
+                    body.classList.add('art-mode'); 
+                } else {
+                    body.classList.remove('art-mode'); 
+                }
+            });
+        });
+    </script>
+</body>
+</html>
